@@ -56,10 +56,21 @@ function App() {
     }
   }, [pathname]);
 
-  // Auth.currentCredentials().then((info) => {
-  //   const cognitoIdentityId = info.identityId;
-  //   console.log(cognitoIdentityId);
-  // });
+  Auth.currentCredentials().then((info) => {
+    const cognitoIdentityId = info.identityId;
+    const accessKeyId = info.accessKeyId;
+    const sessionToken = info.sessionToken;
+    const secretAccessKey = info.secretAccessKey;
+    const identityId = info.identityId;
+    const authenticated = info.authenticated;
+    
+    console.log(cognitoIdentityId);
+    console.log(accessKeyId);
+    console.log(sessionToken);
+    console.log(secretAccessKey);
+    console.log(identityId);
+    console.log(authenticated);
+  });
 
   return (
     <Routes>
