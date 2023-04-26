@@ -58,7 +58,22 @@ function App() {
 
   Auth.currentCredentials().then((info) => {
     const cognitoIdentityId = info.identityId;
+<<<<<<< HEAD
     console.log(cognitoIdentityId);
+=======
+    const accessKeyId = info.accessKeyId;
+    const sessionToken = info.sessionToken;
+    const secretAccessKey = info.secretAccessKey;
+    const identityId = info.identityId;
+    const authenticated = info.authenticated;
+    
+    console.log(cognitoIdentityId);
+    console.log(accessKeyId);
+    console.log(sessionToken);
+    console.log(secretAccessKey);
+    console.log(identityId);
+    console.log(authenticated);
+>>>>>>> e1f773dae7061499bc94339aee7dc65ac8fb88aa
   });
 
   return (
