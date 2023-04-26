@@ -56,10 +56,10 @@ function App() {
     }
   }, [pathname]);
 
-  // Auth.currentCredentials().then((info) => {
-  //   const cognitoIdentityId = info.identityId;
-  //   console.log(cognitoIdentityId);
-  // });
+  Auth.currentCredentials().then((info) => {
+    const cognitoIdentityId = info.identityId;
+    console.log(cognitoIdentityId);
+  });
 
   return (
     <Routes>
