@@ -238,6 +238,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Autocomplete, TextField } from "@mui/material";
 import Plot from 'react-plotly.js';
+import styles from "./Chart.module.css";
 
 function unpack(rows, key) {
   return rows.map(function (row) {
@@ -249,6 +250,8 @@ const Chart = () => {
   const [data, setData] = useState([]);
   const [plotData, setPlotData] = useState([]);
   const [selectedY, setSelectedY] = useState('temperature');
+  
+  const config={responsive: true}
 
   // Fetch data from the API
   useEffect(() => {
@@ -280,12 +283,17 @@ const Chart = () => {
       mode: 'lines'
     };
 
+    console.log([plotlyData]);
+
     setPlotData([plotlyData]);
   }, [data, selectedY]);
 
   return (
+    // <div className={styles.lineCharttwovaluesParent}>
     <div>
+      
       <Autocomplete
+        className={styles.autocompletestandard}
         options={['temperature', 'humidity', 'co2', 'oxygen', 'ph', 'conductivity']} // Available options for y variable
         defaultValue='temperature'
         onChange={(event, value) => setSelectedY(value)}
@@ -298,6 +306,25 @@ const Chart = () => {
         onUpdate={(figure) => this.setState(figure)}
       />
     </div>
+  // <div style={{width: "100%", height: '500px', position: 'relative' }}>
+  // {/* <div className={styles.lineCharttwovaluesParent}> */}
+  //     <Autocomplete
+  //       className={styles.autocompletestandard}
+  //       options={['temperature', 'humidity', 'co2', 'oxygen', 'ph', 'conductivity']} // Available options for y variable
+  //       defaultValue='temperature'
+  //       onChange={(event, value) => setSelectedY(value)}
+  //       renderInput={(params) => <TextField {...params} label="Select Y Variable" />}
+  //     />
+  
+  //   <Plot
+  //     data={plotData}
+  //     // layout={{ width: '100%', height: '100%', autosize: true }}
+  //     config = {config}
+  //     onInitialized={(figure) => this.setState(figure)}
+  //     onUpdate={(figure) => this.setState(figure)}
+  //   />
+  // </div>
+
   );
 };
 
