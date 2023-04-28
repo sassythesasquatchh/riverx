@@ -283,7 +283,7 @@ const Chart = () => {
       mode: 'lines'
     };
 
-    console.log([plotlyData]);
+    // console.log([plotlyData]);
 
     setPlotData([plotlyData]);
   }, [data, selectedY]);
