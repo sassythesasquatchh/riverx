@@ -12,15 +12,16 @@ const ParameterSlider = ({ parentCallback, parameter, min, max, step }) => {
   };
 
   const handleInputChange = (event) => {
-    setValue(event.target.value === '' ? '' : Number(event.target.value));
-    parentCallback(value);
+    const newValue = event.target.value === '' ? '' : Number(event.target.value);
+    setValue(newValue);
+    parentCallback(newValue);
   };
 
   const handleBlur = () => {
-    if (value < 0) {
-      setValue(0);
-    } else if (value > 100) {
-      setValue(100);
+    if (value < min) {
+      setValue(min);
+    } else if (value > max) {
+      setValue(max);
     }
   };
 
@@ -37,7 +38,7 @@ const ParameterSlider = ({ parentCallback, parameter, min, max, step }) => {
             orientation="horizontal"
             step={step}
             onChange={handleSliderChange}
-            value={typeof value === 'number' ? value : 0}
+            value={value}
           />
         </Box>
         <TextField
@@ -45,7 +46,6 @@ const ParameterSlider = ({ parentCallback, parameter, min, max, step }) => {
           sx={{ width: 96 }}
           color="primary"
           variant="standard"
-          defaultValue="7"
           type="number"
           size="medium"
           margin="none"

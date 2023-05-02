@@ -31,14 +31,17 @@ import {AWSIoTProvider} from '@aws-amplify/pubsub';
 
   const handleUpdateSettingsButtonClick = async () => {
     let command = 1;
+    console.log(phSetpoint);
+    console.log(conductivitySetpoint);
+
     // Publish data to an AWS IoT topic with multiple parameters
     await PubSub.publish('capstone/sub', {
       // ph: {phSetpoint},
       command,
-      phSetpoint,
-      conductivitySetpoint,
-      period,
-      dutyCycle
+      phSetpoint: phSetpoint,
+      conductivitySetpoint: conductivitySetpoint,
+      period: period,
+      dutyCycle: dutyCycle
     })
       .then(() => console.log('Message published successfully.'))
       .catch(error => console.error('Error publishing message:', error));

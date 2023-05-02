@@ -241,6 +241,8 @@ import Plot from 'react-plotly.js';
 import styles from "./Chart.module.css";
 
 function unpack(rows, key) {
+  console.log(typeof rows);
+  console.log(key);
   return rows.map(function (row) {
     return row[key];
   });
@@ -257,10 +259,27 @@ const Chart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://7day35xrbospq4slpqt2abr7fq0mzeja.lambda-url.us-east-1.on.aws/');
+        const response = await axios.get('https://7day35xrbospq4slpqt2abr7fq0mzeja.lambda-url.us-east-1.on.aws/',{
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          },
+        });
+      
+        // console.log(typeof response);
+        // console.log(typeof response.data);
+        console.log(response);
+        console.log(response.data);
+        console.log(response.data.body);
+        
+        
         const responseData = response.data;
+        // console.log(responseData);
+        console.log(typeof responseData);
+        console.log(responseData)
 
         // Store the received data in the state
+        // setData(responseData);
         setData(responseData);
       } catch (error) {
         console.log(error);
@@ -274,6 +293,8 @@ const Chart = () => {
     if (data.length === 0 || selectedY === '') {
       return; // Wait for data and selectedY to be set
     }
+
+    // console.log(data)
 
     // Format the data for Plotly
     const plotlyData = {
@@ -306,25 +327,6 @@ const Chart = () => {
         onUpdate={(figure) => this.setState(figure)}
       />
     </div>
-  // <div style={{width: "100%", height: '500px', position: 'relative' }}>
-  // {/* <div className={styles.lineCharttwovaluesParent}> */}
-  //     <Autocomplete
-  //       className={styles.autocompletestandard}
-  //       options={['temperature', 'humidity', 'co2', 'oxygen', 'ph', 'conductivity']} // Available options for y variable
-  //       defaultValue='temperature'
-  //       onChange={(event, value) => setSelectedY(value)}
-  //       renderInput={(params) => <TextField {...params} label="Select Y Variable" />}
-  //     />
-  
-  //   <Plot
-  //     data={plotData}
-  //     // layout={{ width: '100%', height: '100%', autosize: true }}
-  //     config = {config}
-  //     onInitialized={(figure) => this.setState(figure)}
-  //     onUpdate={(figure) => this.setState(figure)}
-  //   />
-  // </div>
-
   );
 };
 
