@@ -241,8 +241,8 @@ import Plot from 'react-plotly.js';
 import styles from "./Chart.module.css";
 
 function unpack(rows, key) {
-  console.log(typeof rows);
-  console.log(key);
+  // console.log(typeof rows);
+  // console.log(key);
   return rows.map(function (row) {
     return row[key];
   });
@@ -259,35 +259,40 @@ const Chart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://7day35xrbospq4slpqt2abr7fq0mzeja.lambda-url.us-east-1.on.aws/',{
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
+        const response = await axios.get('https://7day35xrbospq4slpqt2abr7fq0mzeja.lambda-url.us-east-1.on.aws/', {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
           },
         });
-      
-        // console.log(typeof response);
-        // console.log(typeof response.data);
-        console.log(response);
-        console.log(response.data);
-        console.log(response.data.body);
-        
-        
+  
         const responseData = response.data;
-        // console.log(responseData);
-        console.log(typeof responseData);
-        console.log(responseData)
-
-        // Store the received data in the state
-        // setData(responseData);
         setData(responseData);
       } catch (error) {
-        console.log(error);
+        if (error.response && error.response.status === 502) {
+          // Retry request if 502 error is encountered
+          try {
+            const retryResponse = await axios.get('https://7day35xrbospq4slpqt2abr7fq0mzeja.lambda-url.us-east-1.on.aws/', {
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+              },
+            });
+  
+            const responseData = retryResponse.data;
+            setData(responseData);
+          } catch (retryError) {
+            console.log(retryError);
+          }
+        } else {
+          console.log(error);
+        }
       }
     };
-
+  
     fetchData();
   }, []);
+  
 
   useEffect(() => {
     if (data.length === 0 || selectedY === '') {
