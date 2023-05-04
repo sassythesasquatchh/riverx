@@ -31,8 +31,8 @@ import {AWSIoTProvider} from '@aws-amplify/pubsub';
 
   const handleUpdateSettingsButtonClick = async () => {
     let command = 1;
-    console.log(phSetpoint);
-    console.log(conductivitySetpoint);
+    // console.log(phSetpoint);
+    // console.log(conductivitySetpoint);
 
     // Publish data to an AWS IoT topic with multiple parameters
     await PubSub.publish('capstone/sub', {
@@ -83,12 +83,12 @@ import {AWSIoTProvider} from '@aws-amplify/pubsub';
     // Subscribe to an AWS IoT topic
     const subscription = PubSub.subscribe('capstone/pub').subscribe({
       next: data => {
-        setCurrentPh(data.value.ph);
+        setCurrentPh(data.value.ph*1.0/100);
         setCurrentConductivity(data.value.conductivity);
         setCurrentTemperature(data.value.temperature);
         setCurrentHumidity(data.value.humidity);
         setCurrentLightIntensity(data.value.lightIntensity);
-        setCurrentOxygenConc(data.value.oxygen);
+        setCurrentOxygenConc(data.value.oxygen*1.0/10);
         setCurrentCO2Conc(data.value.co2);
         console.log('Message received', data);
       },
