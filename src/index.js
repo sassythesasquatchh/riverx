@@ -12,8 +12,6 @@ import {
 
 import "./global.css";
 
-
-
 const muiTheme = createTheme();
 
 const container = document.getElementById("root");

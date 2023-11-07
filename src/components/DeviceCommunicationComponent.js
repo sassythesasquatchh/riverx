@@ -34,7 +34,7 @@ function DeviceCommunicationComponent({ deviceData }) {
     const paddedHexString =
       hexString.length % 2 === 0 ? hexString : "0" + hexString;
 
-    return "0x" + paddedHexString;
+    return paddedHexString;
   };
 
   const handleClick = () => {
@@ -44,7 +44,6 @@ function DeviceCommunicationComponent({ deviceData }) {
       return;
     }
     const url = `https://api.akenza.io/v3/devices/${deviceId}/downlink`;
-    console.log(url);
 
     const requestBody = {
       raw: true,
@@ -54,7 +53,6 @@ function DeviceCommunicationComponent({ deviceData }) {
         confirmed: false,
       },
     };
-    console.log(requestBody);
 
     axios
       .post(url, requestBody, {
