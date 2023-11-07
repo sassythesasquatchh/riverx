@@ -1,0 +1,14 @@
+.circularProgressContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex: 1 0 0;
+}
+.outerFrame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+}

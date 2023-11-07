@@ -369,7 +369,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: var(--gap-xl);
+  gap: 20px;
   text-align: center;
   font-size: var(--font-size-4xs);
   color: var(--color-slategray);

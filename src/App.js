@@ -6,19 +6,10 @@ import {
 } from "react-router-dom";
 import Desktop1 from "./pages/Desktop1";
 import { useEffect } from "react";
-import { Amplify, Auth, PubSub} from 'aws-amplify';
-import awsExports from './aws-exports';
-import {withAuthenticator} from '@aws-amplify/ui-react';
-import {AWSIoTProvider} from '@aws-amplify/pubsub';
-
-Amplify.configure(awsExports);
-
-Amplify.addPluggable(
-  new AWSIoTProvider({
-    aws_pubsub_region: 'us-east-1',
-    aws_pubsub_endpoint: 'wss://a25w67mn0bb0hm-ats.iot.us-east-1.amazonaws.com/mqtt'
-  })
-);
+import { Amplify, Auth, PubSub } from "aws-amplify";
+import awsExports from "./aws-exports";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import { AWSIoTProvider } from "@aws-amplify/pubsub";
 
 function App() {
   const action = useNavigationType();
@@ -56,15 +47,10 @@ function App() {
     }
   }, [pathname]);
 
-  Auth.currentCredentials().then((info) => {
-    const cognitoIdentityId = info.identityId;
-    console.log(cognitoIdentityId);
-  });
-
   return (
     <Routes>
       <Route path="/" element={<Desktop1 />} />
     </Routes>
   );
 }
-export default withAuthenticator(App);
+export default App;
