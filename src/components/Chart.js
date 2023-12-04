@@ -32,7 +32,8 @@ const Chart = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://api.akenza.io/v3/devices/0221948277bcd06f/query?topic=*&limit=500&skip=0",
+          // Currently reporting data from riverX Holderbach
+          "https://api.akenza.io/v3/devices/026ecf75a2d15f2b/query?topic=*&limit=500&skip=0",
           {
             headers: {
               Accept: "application/json",
