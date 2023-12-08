@@ -164,7 +164,7 @@ const Chart = () => {
 
     switch (selectedY) {
       case "Temperature":
-        plotlyData.y = data.map((entry) => entry.data.temperature);
+        plotlyData.y = data.map((entry) => entry.data.temp);
         plotlyData.marker = {
           color: "#247BC7",
         };
@@ -181,8 +181,8 @@ const Chart = () => {
 
       case "Turbidity":
         plotlyData.y = data
-          .filter((entry) => entry.data.irOff !== 9999)
-          .map((entry) => entry.data.irOff);
+          .filter((entry) => entry.data.ntu !== 9999)
+          .map((entry) => entry.data.ntu);
         plotlyData.marker = {
           color: "#C15627",
         };
